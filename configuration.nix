@@ -112,6 +112,7 @@
     git
     kitty
     bat
+    btop
     #waybar
     #foot
   ];

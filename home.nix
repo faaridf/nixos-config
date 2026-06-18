@@ -46,7 +46,7 @@
 		mpvScripts.thumbfast
 		mpvScripts.mpv-webm
 		mpvScripts.webtorrent-mpv-hook
-    ladybird
-    wl-clipboard
+		ladybird
+		wl-clipboard
 	];
 }
