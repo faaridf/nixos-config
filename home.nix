@@ -31,8 +31,8 @@
 			
 			# unstable nh search
 			nhs = "nh search --channel=nixos-unstable";
-		}
-	}
+		};
+	};
 
   home.file.".config/qtile".source = ./config/qtile;
   home.file.".config/nvim".source = ./config/nvim;
