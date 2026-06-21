@@ -23,9 +23,20 @@ in {
   #   boot.loader.efi.canTouchEfiVariables = true;
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.useOSProber = true;
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.device = "/dev/vda";
+  # boot.loader.grub.useOSProber = true;
+
+  # Bootloader Limine
+  boot.loader.limine = {
+    enable = true;
+    biosSupport = true;
+    biosDevice = "/dev/vda"; # Matches your target drive from GRUB
+
+    # Optional: Limits boot menu clutter
+    maxGenerations = 10;
+  };
+
   # services.getty.autologinUser = "niko";
 
   # Use latest kernel.
