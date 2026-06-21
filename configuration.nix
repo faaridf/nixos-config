@@ -116,6 +116,7 @@
     #waybar
     #foot
     vscodium
+    nixfmt
   ];
 
   fonts.packages = with pkgs ; [
