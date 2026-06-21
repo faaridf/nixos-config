@@ -46,9 +46,10 @@
     mpvScripts.webtorrent-mpv-hook
     # ladybird
     kitty
+    vscodium
   ];
 
-  programs.vscodium = {
+  programs.vscode = {
     enable = true;
     # package = pkgs.vscodium;
 
