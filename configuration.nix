@@ -115,6 +115,7 @@
     btop
     #waybar
     #foot
+    vscodium
   ];
 
   fonts.packages = with pkgs ; [
