@@ -1,0 +1,27 @@
+# -f "bestvideo[height<=1080][vcodec^=avc]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]"
+
+# vp9 should not be an issue
+
+-o ~/Videos/.yt-dlp/%(title)s.%(ext)s
+
+--write-subs
+--sub-langs en.*
+--embed-subs
+--compat-options no-keep-subs
+
+# Default
+-f bestvideo[height<=1080]+bestaudio/best
+
+# Music only
+--alias m,-M '-f "bestaudio[ext=m4a]/bestaudio" --embed-thumbnail --audio-format m4a -o "~/Music/%(title)s.%(ext)s"'
+
+
+# Best avc vcodec
+--alias v,-V '-f "bestvideo[height<=1080][vcodec^=avc]+bestaudio/best[height<=1080][ext=mp4]"'
+
+# Highest possible resolution (no height constraint)
+--alias b,-B '-f "bestvideo+bestaudio/best"'
+
+# 360p
+
+--alias l,-L '-f "bestvideo[height<=360][ext=webm]+bestaudio/best[height<=360][ext=webm]"'
