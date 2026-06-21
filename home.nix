@@ -61,7 +61,7 @@
       "nix.serverPath" = "nil";
       "nix.serverSettings" = {
         "nil" = {
-          "formatting" = {"command" = ["nixfmt"];};
+          "formatting" = {"command" = ["alejandra"];};
         };
       };
       "[nix]" = {
