@@ -46,18 +46,19 @@
     mpvScripts.webtorrent-mpv-hook
     # ladybird
     kitty
-    vscodium
+    # vscodium
   ];
 
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
     # package = pkgs.vscodium;
 
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
+      kamadorueda.alejandra
     ];
 
-    userSettings = {
+    profiles.default.userSettings = {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
       "nix.serverSettings" = {
