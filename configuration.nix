@@ -95,14 +95,16 @@ in {
   users.users.niko = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    shell = pkgs.fish;
     packages = with pkgs; [
       tree
     ];
   };
 
-  programs.firefox.enable = true;
-
   nixpkgs.config.allowUnfree = true;
+
+  programs.fish.enable = true;
+  programs.firefox.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
