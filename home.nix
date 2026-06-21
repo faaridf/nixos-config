@@ -13,20 +13,27 @@
 
   home.sessionVariables = {
     NH_FLAKE = "/home/niko/nixos-dots";
+		NH_DEFAULT_CHANNEL = "nixos-26.05";
   };
 
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      cf = "clear && fastfetch";
-      gg = "echo wow, so cool";
-    };
-    #profileExtra = ''
-    #	if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-    #		exec uwsm start select hyprland-uwsm.desktop
-    #	fi
-    #'';
-  };
+  # programs.bash = {
+  #   enable = true;
+  #   shellAliases = {
+  #     cf = "clear && fastfetch";
+  #     gg = "echo wow, so cool";
+  #   };
+  # };
+
+	programs.fish = {
+		enable = true;
+		shellAliases = {
+			cf = "clear && fastfetch";
+			
+			# unstable nh search
+			nhs = "nh search --channel=nixos-unstable;"
+		}
+	}
+
   home.file.".config/qtile".source = ./config/qtile;
   home.file.".config/nvim".source = ./config/nvim;
 
@@ -35,6 +42,6 @@
     mpvScripts.thumbfast
     mpvScripts.mpv-webm
     mpvScripts.webtorrent-mpv-hook
-    ladybird
+    # ladybird
   ];
 }

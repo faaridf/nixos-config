@@ -6,10 +6,18 @@
   config,
   lib,
   pkgs,
+  inputs
   ...
 }:
 
 {
+  let 
+    unstable = import inputs.nixpkgs-unstable {
+      system = pkgs.stdenv.hostPlatform.system;
+      config.allowUnfree = true;
+    };
+  in 
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -98,6 +106,8 @@
   };
 
   programs.firefox.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
