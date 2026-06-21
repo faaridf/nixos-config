@@ -118,6 +118,18 @@
     #foot
     vscodium
     nixfmt
+    neovim
+    ripgrep
+    nil
+    # nixpkgs-fmt
+    nodejs
+    gcc
+    nh
+    nvd
+    nix-output-monitor
+    tealdeer
+    wl-clipboard
+
   ];
 
   fonts.packages = with pkgs; [

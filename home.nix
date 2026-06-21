@@ -31,21 +31,10 @@
   home.file.".config/nvim".source = ./config/nvim;
 
   home.packages = with pkgs; [
-    neovim
-    ripgrep
-    nil
-    nixpkgs-fmt
-    nodejs
-    gcc
-    nh
-    nvd
-    nix-output-monitor
-    tealdeer
     mpvScripts.mpris
     mpvScripts.thumbfast
     mpvScripts.mpv-webm
     mpvScripts.webtorrent-mpv-hook
     ladybird
-    wl-clipboard
   ];
 }
