@@ -48,9 +48,9 @@
     kitty
   ];
 
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
-    package = pkgs.vscodium;
+    # package = pkgs.vscodium;
 
     extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
