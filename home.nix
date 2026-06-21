@@ -30,7 +30,7 @@
 			cf = "clear && fastfetch";
 			
 			# unstable nh search
-			nhs = "nh search --channel=nixos-unstable;"
+			nhs = "nh search --channel=nixos-unstable";
 		}
 	}
 
