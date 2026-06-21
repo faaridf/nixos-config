@@ -3,16 +3,18 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   config,
-  lib,
+  lib, 
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   unstable = import inputs.nixpkgs-unstable {
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -94,7 +96,7 @@ in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.niko = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
@@ -124,6 +126,7 @@ in {
     neovim
     ripgrep
     nil
+    nixfmt
     # nixpkgs-fmt
     nodejs
     gcc
