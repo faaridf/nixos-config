@@ -2,17 +2,22 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
-#   boot.loader.systemd-boot.enable = true;
-#   boot.loader.efi.canTouchEfiVariables = true;
+  #   boot.loader.systemd-boot.enable = true;
+  #   boot.loader.efi.canTouchEfiVariables = true;
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -22,7 +27,6 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
 
   networking.hostName = "nixos-btw"; # Define your hostname.
 
@@ -47,7 +51,7 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  
+
   # services.xserver = {
   #   enable = true;
   #   autoRepeatDelay = 200;
@@ -55,13 +59,10 @@
   #   windowManager.qtile.enable = true;
   # };
 
-
-
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
   #services.desktopManager.cosmic.enable = true;
   #services.displayManager.cosmic-greeter.enable = true;
-
 
   #programs.hyprland = {
   #  enable = true;
@@ -119,11 +120,14 @@
     nixfmt
   ];
 
-  fonts.packages = with pkgs ; [
+  fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -169,4 +173,3 @@
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
-
