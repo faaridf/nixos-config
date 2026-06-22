@@ -41,6 +41,11 @@
   home.file.".config/qtile".source = ./config/qtile;
   home.file.".config/nvim".source = ./config/nvim;
 
+  xdg.configFile."fish" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/fish";
+    recursive = true;
+  };
+
   home.packages = with pkgs; [
     mpvScripts.mpris
     mpvScripts.thumbfast
@@ -78,6 +83,8 @@
         "editor.validate.enable" = true;
       };
       "update.showReleaseNotes" = false;
+      "editor.fontFamily" = "'Mononoki Nerd Font', monospaced Font";
+      "editor.wordWrap" = "on";
     };
   };
 }
