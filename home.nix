@@ -48,7 +48,7 @@
     # ladybird
     kitty
     # vscodium
-    rnix-lsp
+    # rnix-lsp
   ];
 
   programs.vscodium = {

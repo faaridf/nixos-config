@@ -7,12 +7,14 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   unstable = import inputs.nixpkgs-unstable {
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -105,7 +107,7 @@ in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.niko = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
       tree
@@ -134,12 +136,12 @@ in {
     btop
     # vscodium
     #nixfmt use alejandra
-    alejandra
+    # alejandra
     neovim
     ripgrep
     nil
-    nixfmt
-    # nixpkgs-fmt
+    # nixfmt
+    nixpkgs-fmt
     nodejs
     gcc
     nh
@@ -151,6 +153,7 @@ in {
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
+    nerd-fonts.mononoki
   ];
 
   nix.settings.experimental-features = [
