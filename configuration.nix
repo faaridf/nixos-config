@@ -169,11 +169,10 @@
     GIT_AUTHOR_EMAIL = "173501018+faaridf@users.noreply.github.com";
     GIT_COMMITTER_NAME = "niko";
     GIT_COMMITTER_EMAIL = "173501018+faaridf@users.noreply.github.com";
-  };
-
-  # 3. Fix the Immediate Crash: Allow 'root' to access 'niko's git repository
-  programs.git.config = {
-    safe.directory = ["/home/niko/nixos-dots"];
+    # Inline environment override to bypass the cross-user ownership security check
+    GIT_CONFIG_COUNT = "1";
+    GIT_CONFIG_KEY_0 = "safe.directory";
+    GIT_CONFIG_VALUE_0 = "/home/niko/nixos-dots";
   };
 
   # Open ports in the firewall.
