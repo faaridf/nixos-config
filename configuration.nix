@@ -32,7 +32,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true; #awesome this just works but my
+  boot.loader.efi.canTouchEfiVariables = true; # awesome this just works but my
   #system is currently still the same as what tony does
   # 1g boot 4g swap rest ext4
   # i guess i dont need btrfs anymore with nixos tho
@@ -99,7 +99,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.niko = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
       tree
@@ -163,7 +163,7 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true; #hmmm? ig its not needed during version control? nice to have it though
+  # system.copySystemConfiguration = true; # system.copySystemConfiguration is not supported with flakes
 
   # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
   # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
