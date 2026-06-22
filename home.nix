@@ -34,7 +34,10 @@ in {
       source = create_symlink "${dotfiles}/${subpath}";
       recursive = true;
     })
-    configs; # looping over the config files
+    configs
+    // {
+      "kcminputrc".source = create_symlink "${dotfiles}/kcminputrc";
+    }; # looping over the config files
 
   # programs.bash = {
   #   enable = true;
