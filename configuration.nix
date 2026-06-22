@@ -8,16 +8,25 @@
   inputs,
   ...
 }:
-let
-  unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config.allowUnfree = true;
-  };
-in
+# let
+#   unstable = import inputs.nixpkgs-unstable {
+#     system = pkgs.stdenv.hostPlatform.system;
+#     config.allowUnfree = true;
+#   };
+# in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+  ];
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = prev.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
+    })
   ];
 
   # Use the systemd-boot EFI boot loader.

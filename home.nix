@@ -3,6 +3,7 @@
   pkgs,
   ...
 }:
+
 {
   home.username = "niko";
   home.homeDirectory = "/home/niko";
@@ -48,7 +49,7 @@
     # ladybird
     kitty
     # vscodium
-    vesktop
+    unstable.vesktop
   ];
 
   programs.vscodium = {
