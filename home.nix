@@ -29,8 +29,8 @@ in
   #home.stateVersion = 25.11;
 
   home.sessionVariables = {
-    NH_FLAKE = "/home/niko/nixos-dots";
-    NH_DEFAULT_CHANNEL = "nixos-26.05";
+    NH_FLAKE = "/home/niko/nixos-dots"; # gonna keep my dots here its convenient
+    NH_DEFAULT_CHANNEL = "nixos-26.05"; # not sure if this works
   };
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {
@@ -47,6 +47,7 @@ in
   # };
 
   programs.fish = {
+    # switched to fish
     enable = true;
     shellAliases = {
       cf = "clear && fastfetch";
