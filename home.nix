@@ -7,6 +7,14 @@
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dots/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+
+  configs = {
+    nvim = "nvim";
+    kitty = "kitty";
+    mpv = "mpv";
+    yt-dlp = "yt-dlp";
+    ncspot = "ncspot";
+  };
 in
 
 {
@@ -24,6 +32,11 @@ in
     NH_FLAKE = "/home/niko/nixos-dots";
     NH_DEFAULT_CHANNEL = "nixos-26.05";
   };
+
+  xdg.configFile = builtins.mapAttrs (name: subpath: {
+    source = create_symlink "${dotfiles}/${subpath}";
+    recursive = true;
+  }) configs; # looping over the config files
 
   # programs.bash = {
   #   enable = true;
@@ -43,23 +56,23 @@ in
     };
   };
 
-  home.file.".config/qtile".source = ./config/qtile;
+  # home.file.".config/qtile".source = ./config/qtile;
   # home.file.".config/nvim".source = ./config/nvim;
   # home.file.".config/fish".source = ./config/fish;
 
-  xdg.configFile."nvim" = {
-    # source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/nvim/";
-    source = create_symlink "${dotfiles}/nvim";
-    recursive = true;
-  };
+  # xdg.configFile."nvim" = {
+  #   # source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/nvim/";
+  #   source = create_symlink "${dotfiles}/nvim";
+  #   recursive = true;
+  # };
 
-  xdg.configFile."kitty" = {
-    source = create_symlink "${dotfiles}/kitty";
-    recursive = true;
-  };
+  # xdg.configFile."kitty" = {
+  #   source = create_symlink "${dotfiles}/kitty";
+  #   recursive = true;
+  # };
 
-  # xdg.configFile."fish" = {
-  #   source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/fish/";
+  # xdg.configFile."mpv" = {
+  #   source = create_symlink "${dotfiles}/mpv";
   #   recursive = true;
   # };
 
