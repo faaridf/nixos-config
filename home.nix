@@ -4,6 +4,11 @@
   ...
 }:
 
+let
+  dotfiles = "${config.home.homeDirectory}/nixos-dots/config";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+in
+
 {
   home.username = "niko";
   home.homeDirectory = "/home/niko";
@@ -39,12 +44,24 @@
   };
 
   home.file.".config/qtile".source = ./config/qtile;
-  home.file.".config/nvim".source = ./config/nvim;
+  # home.file.".config/nvim".source = ./config/nvim;
+  # home.file.".config/fish".source = ./config/fish;
 
-  xdg.configFile."fish" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/fish";
+  xdg.configFile."nvim" = {
+    # source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/nvim/";
+    source = create_symlink "${dotfiles}/nvim";
     recursive = true;
   };
+
+  xdg.configFile."kitty" = {
+    source = create_symlink "${dotfiles}/kitty";
+    recursive = true;
+  };
+
+  # xdg.configFile."fish" = {
+  #   source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/fish/";
+  #   recursive = true;
+  # };
 
   home.packages = with pkgs; [
     mpvScripts.mpris
@@ -63,20 +80,21 @@
 
     profiles.default.extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
-      # kamadorueda.alejandra
+      kamadorueda.alejandra
 
     ];
 
     profiles.default.userSettings = {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
-      "nix.serverSettings" = {
-        "nil" = {
-          # "formatting" = {
-          #   "command" = [ "nixfmt" ];
-          # };
-        };
-      };
+      "nix.formatterPath" = "alejandra";
+      # "nix.serverSettings" = {
+      #   "nil" = {
+      #     # "formatting" = {
+      #     #   "command" = [ "alejandra" ];
+      #     # };
+      #   };
+      # };
       "[nix]" = {
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
         "editor.formatOnSave" = true;
