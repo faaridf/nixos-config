@@ -88,6 +88,14 @@ in
     unstable.vesktop
   ];
 
+  services.flatpak = {
+    packages = [
+      "com.github.Anuken.Mindustry" # hell yea
+
+    ];
+  };
+
+  #vscodium with nix ide
   programs.vscodium = {
     enable = true;
     # package = pkgs.vscodium;
