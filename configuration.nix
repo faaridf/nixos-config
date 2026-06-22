@@ -99,7 +99,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.niko = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
       tree
@@ -153,6 +153,17 @@
     "nix-command"
     "flakes"
   ];
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = "/home/niko/nixos-dots";
+    flags = [
+      "--print-build-logs"
+      "--commit-lock-file" # If you want to automatically commit the updated flake.lock
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
