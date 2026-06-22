@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs =
@@ -15,6 +16,7 @@
       self,
       nixpkgs,
       home-manager,
+      nix-flatpak,
       ...
     }@inputs:
     {
@@ -32,6 +34,9 @@
               useUserPackages = true;
               users.niko = import ./home.nix;
               backupFileExtension = "backup";
+
+              #flatpak integration?
+              sharedModules = [ inputs.nix-flatpak.homeManagerModules.nix-flatpak ];
             };
           }
         ];
