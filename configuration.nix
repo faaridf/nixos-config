@@ -164,6 +164,17 @@
     dates = "02:00";
     randomizedDelaySec = "45min";
   };
+  systemd.services.nixos-upgrade.environment = {
+    GIT_AUTHOR_NAME = "niko";
+    GIT_AUTHOR_EMAIL = "173501018+faaridf@users.noreply.github.com";
+    GIT_COMMITTER_NAME = "niko";
+    GIT_COMMITTER_EMAIL = "173501018+faaridf@users.noreply.github.com";
+  };
+
+  # 3. Fix the Immediate Crash: Allow 'root' to access 'niko's git repository
+  programs.git.config = {
+    safe.directory = ["/home/niko/nixos-dots"];
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
