@@ -3,12 +3,18 @@
   pkgs,
   ...
 }:
-
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dots/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-in
 
+  configs = {
+    nvim = "nvim";
+    kitty = "kitty";
+    mpv = "mpv";
+    yt-dlp = "yt-dlp";
+    ncspot = "ncspot";
+  };
+in
 {
   home.username = "niko";
   home.homeDirectory = "/home/niko";
@@ -21,9 +27,19 @@ in
   #home.stateVersion = 25.11;
 
   home.sessionVariables = {
-    NH_FLAKE = "/home/niko/nixos-dots";
-    NH_DEFAULT_CHANNEL = "nixos-26.05";
+    NH_FLAKE = "/home/niko/nixos-dots"; # gonna keep my dots here its convenient
+    NH_DEFAULT_CHANNEL = "nixos-26.05"; # not sure if this works
   };
+
+  xdg.configFile =
+    builtins.mapAttrs (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    }) configs
+    // {
+      "kcminputrc".source = create_symlink "${dotfiles}/kcminputrc";
+      "ksmserverrc".source = create_symlink "${dotfiles}/ksmserverrc";
+    }; # looping over the config files
 
   # programs.bash = {
   #   enable = true;
@@ -34,32 +50,34 @@ in
   # };
 
   programs.fish = {
+    # switched to fish
     enable = true;
     shellAliases = {
       cf = "clear && fastfetch";
+      cc = "clear";
 
       # unstable nh search
       nhs = "nh search --channel=nixos-unstable";
     };
   };
 
-  home.file.".config/qtile".source = ./config/qtile;
+  # home.file.".config/qtile".source = ./config/qtile;
   # home.file.".config/nvim".source = ./config/nvim;
   # home.file.".config/fish".source = ./config/fish;
 
-  xdg.configFile."nvim" = {
-    # source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/nvim/";
-    source = create_symlink "${dotfiles}/nvim";
-    recursive = true;
-  };
+  # xdg.configFile."nvim" = {
+  #   # source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/nvim/";
+  #   source = create_symlink "${dotfiles}/nvim";
+  #   recursive = true;
+  # };
 
-  xdg.configFile."kitty" = {
-    source = create_symlink "${dotfiles}/kitty";
-    recursive = true;
-  };
+  # xdg.configFile."kitty" = {
+  #   source = create_symlink "${dotfiles}/kitty";
+  #   recursive = true;
+  # };
 
-  # xdg.configFile."fish" = {
-  #   source = config.lib.file.mkOutOfStoreSymlink "/home/niko/nixos-dots/config/fish/";
+  # xdg.configFile."mpv" = {
+  #   source = create_symlink "${dotfiles}/mpv";
   #   recursive = true;
   # };
 
@@ -68,20 +86,29 @@ in
     mpvScripts.thumbfast
     mpvScripts.mpv-webm
     mpvScripts.webtorrent-mpv-hook
-    # ladybird
+    # ladybird #ts actually works on here idk if its built from scratch everytime
     kitty
-    # vscodium
+    # vscodium #nope used below, should move it to a differernet nix but thats for #add LATER
     unstable.vesktop
+    unstable.cloudflare-warp
+
   ];
 
+  services.flatpak = {
+    packages = [
+      "com.github.Anuken.Mindustry" # hell yea
+      "org.vinegarhq.Sober" # roblox
+    ];
+  };
+
+  #vscodium with nix ide
   programs.vscodium = {
     enable = true;
     # package = pkgs.vscodium;
 
     profiles.default.extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
-      kamadorueda.alejandra
-
+      kamadorueda.alejandra # doesnt need the
     ];
 
     profiles.default.userSettings = {
