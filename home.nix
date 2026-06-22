@@ -2,9 +2,7 @@
   config,
   pkgs,
   ...
-}:
-
-let
+}: let
   dotfiles = "${config.home.homeDirectory}/nixos-dots/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 
@@ -15,9 +13,7 @@ let
     yt-dlp = "yt-dlp";
     ncspot = "ncspot";
   };
-in
-
-{
+in {
   home.username = "niko";
   home.homeDirectory = "/home/niko";
   programs.git = {
@@ -33,10 +29,12 @@ in
     NH_DEFAULT_CHANNEL = "nixos-26.05"; # not sure if this works
   };
 
-  xdg.configFile = builtins.mapAttrs (name: subpath: {
-    source = create_symlink "${dotfiles}/${subpath}";
-    recursive = true;
-  }) configs; # looping over the config files
+  xdg.configFile =
+    builtins.mapAttrs (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs; # looping over the config files
 
   # programs.bash = {
   #   enable = true;
@@ -82,16 +80,17 @@ in
     mpvScripts.thumbfast
     mpvScripts.mpv-webm
     mpvScripts.webtorrent-mpv-hook
-    # ladybird
+    # ladybird #ts actually works on here idk if its built from scratch everytime
     kitty
-    # vscodium
+    # vscodium #nope used below, should move it to a differernet nix but thats for #add LATER
     unstable.vesktop
+    # alejandra #not needed??
   ];
 
   services.flatpak = {
     packages = [
       "com.github.Anuken.Mindustry" # hell yea
-
+      "org.vinegarhq.Sober" #roblox
     ];
   };
 
@@ -102,8 +101,7 @@ in
 
     profiles.default.extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
-      kamadorueda.alejandra
-
+      kamadorueda.alejandra # doesnt need the
     ];
 
     profiles.default.userSettings = {
