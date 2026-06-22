@@ -89,7 +89,8 @@ in
     kitty
     # vscodium #nope used below, should move it to a differernet nix but thats for #add LATER
     unstable.vesktop
-    # alejandra #not needed??
+    unstable.cloudflare-warp
+
   ];
 
   services.flatpak = {
