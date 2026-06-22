@@ -2,8 +2,7 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   dotfiles = "${config.home.homeDirectory}/nixos-dots/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 
@@ -14,8 +13,7 @@ let
     yt-dlp = "yt-dlp";
     ncspot = "ncspot";
   };
-in
-{
+in {
   home.username = "niko";
   home.homeDirectory = "/home/niko";
   programs.git = {
@@ -35,9 +33,11 @@ in
     builtins.mapAttrs (name: subpath: {
       source = create_symlink "${dotfiles}/${subpath}";
       recursive = true;
-    }) configs
+    })
+    configs
     // {
       "kcminputrc".source = create_symlink "${dotfiles}/kcminputrc";
+      "ksmserverrc".source = create_symlink "${dotfiles}/ksmserverrc";
     }; # looping over the config files
 
   # programs.bash = {
