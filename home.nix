@@ -103,6 +103,7 @@ in
       "update.showReleaseNotes" = false;
       "editor.fontFamily" = "'Mononoki Nerd Font', monospaced Font";
       "editor.wordWrap" = "on";
+      "git.autofetch" = "all";
     };
   };
 }
