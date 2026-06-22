@@ -19,8 +19,8 @@ in {
   ];
 
   # Use the systemd-boot EFI boot loader.
-  #   boot.loader.systemd-boot.enable = true;
-  #   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Bootloader.
   # boot.loader.grub.enable = true;
@@ -28,14 +28,14 @@ in {
   # boot.loader.grub.useOSProber = true;
 
   # Bootloader Limine
-  boot.loader.limine = {
-    enable = true;
-    biosSupport = true;
-    biosDevice = "/dev/vda"; # Matches your target drive from GRUB
+  # boot.loader.limine = {
+  #   enable = true;
+  #   biosSupport = true;
+  #   biosDevice = "/dev/vda"; # Matches your target drive from GRUB
 
-    # Optional: Limits boot menu clutter
-    maxGenerations = 10;
-  };
+  #   # Optional: Limits boot menu clutter
+  #   maxGenerations = 10;
+  # };
 
   # services.getty.autologinUser = "niko";
 

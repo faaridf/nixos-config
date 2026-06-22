@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   home.username = "niko";
   home.homeDirectory = "/home/niko";
   programs.git = {
@@ -47,6 +48,7 @@
     # ladybird
     kitty
     # vscodium
+    rnix-lsp
   ];
 
   programs.vscodium = {
@@ -55,7 +57,8 @@
 
     profiles.default.extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
-      kamadorueda.alejandra
+      # kamadorueda.alejandra
+
     ];
 
     profiles.default.userSettings = {
@@ -63,7 +66,9 @@
       "nix.serverPath" = "nil";
       "nix.serverSettings" = {
         "nil" = {
-          "formatting" = {"command" = ["alejandra"];};
+          "formatting" = {
+            "command" = [ "alejandra" ];
+          };
         };
       };
       "[nix]" = {
