@@ -31,29 +31,21 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true; # awesome this just works but my
+
+  boot.loader.limine = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true; # Highly recommended for virtual environments like Hyper-V
+    maxGenerations = 10;          # Limits boot menu clutter
+  };
+
+
   #system is currently still the same as what tony does
   # 1g boot 4g swap rest ext4
   # i guess i dont need btrfs anymore with nixos tho
   # what about swap?
-
-  # Bootloader.
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.device = "/dev/vda";
-  # boot.loader.grub.useOSProber = true;
-
-  # Bootloader Limine
-  # boot.loader.limine = {
-  #   enable = true;
-  #   biosSupport = true;
-  #   biosDevice = "/dev/vda"; # Matches your target drive from GRUB
-
-  #   # Optional: Limits boot menu clutter
-  #   maxGenerations = 10;
-  # };
-
-  # services.getty.autologinUser = "niko";
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
